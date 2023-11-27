@@ -1,16 +1,16 @@
 import { IsOptional } from 'class-validator';
 import { Prenda } from 'entities/prenda.entity';
+import { PrendaCarrito } from 'entities/prenda_carrito.entity';
 import { User } from 'entities/user.entity';
 import { Schema as MongooseSchema } from 'mongoose';
 
 
 export class CreateVentaDto {
 
-    _id: string;
     @IsOptional()
     fecha: string;
     @IsOptional()   
-    productos: [Prenda];
+    productos: [PrendaCarrito];
     @IsOptional()
     referencia: string;
     @IsOptional()

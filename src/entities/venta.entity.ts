@@ -7,8 +7,6 @@ import { PrendaCarrito, PrendaCarritoSchema } from './prenda_carrito.entity';
 
 @Schema()
 export class Venta extends Document {
-    @Prop({ type: String})
-    _id: string;
 
     @Prop({ type: String })
     fecha: string;

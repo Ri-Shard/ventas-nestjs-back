@@ -13,7 +13,6 @@ export class VentaRepository {
 
     async createVenta(createVentaDto: CreateVentaDto, session: ClientSession) {
         let venta = new this.ventaModel({
-            _id:createVentaDto._id,
             fecha:createVentaDto.fecha,
             productos:createVentaDto.productos,
             referencia:createVentaDto.referencia,
@@ -41,7 +40,7 @@ export class VentaRepository {
         let venta;
         try {
             venta = await this.ventaModel
-                .findOneAndUpdate({ _id: updateVenta._id }, updateData, {
+                .findOneAndUpdate({ referencia: updateVenta.referencia }, updateData, {
                     new: true,
                 })
                 .session(session)
