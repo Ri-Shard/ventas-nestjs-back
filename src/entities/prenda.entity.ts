@@ -6,6 +6,9 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 export class Prenda extends Document {
 
     @Prop({ type: String })
+    id: string;
+
+    @Prop({ type: String })
     nombre: string;
 
     @Prop({ type: String })
