@@ -40,10 +40,13 @@ export class EmailService {
     const tableRows = orderDetails.map(
       (item) =>
         `<tr>
-          <td>${item.id}</td>
-          <td>${item.nombre}</td>
-          <td>${1}</td>
-          <td>${item.precio * 1}</td>
+          <td>${item.producto.id}</td>
+          <td>${item.producto.nombre}</td>
+          <td>${item.cantidad}</td>
+          <td>${item.color}</td>
+          <td>${item.talla}</td>
+          <td>${item.producto.precio * item.cantidad}</td>
+          
         </tr>`,
     );
 
@@ -52,6 +55,8 @@ export class EmailService {
         <th>Código</th>
         <th>Nombre</th>
         <th>Cantidad</th>
+        <th>Color</th>
+        <th>Talla</th>
         <th>Total</th>
       </tr>
     `;
