@@ -63,8 +63,9 @@ export class VentaRepository {
 
     async getVentaById(id: String) {
         let venta;
+        const filter  = { referencia: id };
         try {
-            venta = await this.ventaModel.findById(id).exec();
+            venta = await this.ventaModel.findOne(filter).exec();
         } catch (error) {
             throw new InternalServerErrorException(error);
         }
