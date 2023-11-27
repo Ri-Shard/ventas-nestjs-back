@@ -4,8 +4,6 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 
 @Schema()
 export class User extends Document {
-    @Prop({ type: String, required: true})
-    _id: string;
 
     @Prop({ type: String })
     nombre: string;
