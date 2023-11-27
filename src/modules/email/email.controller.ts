@@ -3,10 +3,11 @@ import { EmailService } from './email.service';
 
 @Controller('email')
 export class EmailController {
- constructor(private readonly emailService: EmailService) {}
+  constructor(private readonly emailService: EmailService) {}
 
- @Post('send')
- async sendEmail(@Body() body: { to: string; subject: string; text: string }) {
-    await this.emailService.sendEmail(body.to, body.subject, body.text);
- }
+  @Post('sendPurchaseNotification')
+  async sendPurchaseNotificationToAdmin(@Body() body: any): Promise<any> {
+    const { customerData, orderDetails } = body;
+    return await this.emailService.sendEmail(customerData, orderDetails);
+  }
 }

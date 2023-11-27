@@ -9,20 +9,26 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { EmailModule } from './modules/email/email.module';
 @Module({
-  imports: [VentasModule,EmailModule,
-     MongooseModule.forRootAsync({
-       imports: [ConfigModule],
-       inject: [ConfigService],
-       useFactory: async (configService: ConfigService) => configService.getMongoConfig(),
-     }),
-     MailerModule.forRoot({
+  imports: [
+    VentasModule,
+    EmailModule,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) =>
+        configService.getMongoConfig(),
+    }),
+    MailerModule.forRoot({
       transport: {
-        host: 'smtp2go.com',
-        port: 465,
-        secure: true,
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
         auth: {
-          user: 'api-90285468D60C4112B3F8BB812978A7A0',
-          pass: '',
+          user: 'camilacharrypagina@gmail.com',
+          pass: 'wuatorclvothpggd',
+        },
+        tls: {
+          rejectUnauthorized: false,
         },
       },
       defaults: {
@@ -35,8 +41,9 @@ import { EmailModule } from './modules/email/email.module';
           strict: true,
         },
       },
-    }),],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
- })
- export class AppModule {}
+})
+export class AppModule {}
