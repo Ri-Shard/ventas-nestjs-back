@@ -6,8 +6,8 @@ export class EmailService {
   constructor(private readonly mailerService: MailerService) {}
 
   sendEmail(customerData: any, orderDetails: any[]): any {
-    const customerName = customerData.nombre;
-    const customerEmail = customerData.correo;
+    const customerName = customerData.usr.nombre;
+    const customerEmail = customerData.usr.correo;
     const itemsTable = this.buildItemsTable(orderDetails);
     const htmlContent = `
     <p>¡Hola!</p>
