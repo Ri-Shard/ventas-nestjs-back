@@ -8,6 +8,7 @@ export class EmailService {
   sendEmail(customerData: any, orderDetails: any[]): any {
     const customerName = customerData.usr.nombre;
     const customerEmail = customerData.usr.correo;
+    const customerDireccion = customerData.usr.direccion;
     const itemsTable = this.buildItemsTable(orderDetails);
     const htmlContent = `
     <p>¡Hola!</p>
@@ -15,6 +16,7 @@ export class EmailService {
     <h2>Información del Cliente:</h2>
     <p><strong>Nombre:</strong> ${customerName}</p>
     <p><strong>Email:</strong> ${customerEmail}</p>
+    <p><strong>Direccion:</strong> ${customerDireccion}</p>
     
     <h2>Detalles del Pedido:</h2>
     ${itemsTable}
@@ -37,19 +39,26 @@ export class EmailService {
   }
 
   private buildItemsTable(orderDetails: any[]): string {
-    const tableRows = orderDetails.map(
-      (item) =>
-        `<tr>
+    const tableRows = orderDetails.map((item) => {
+      // Convierte la lista de personalizaciones en una lista con viñetas
+      const personalizacionesList = item.producto.personalizacion.map(
+        (personalizacion) => `<li>${personalizacion}</li>`
+      ).join('');
+  
+      return `
+        <tr>
           <td>${item.producto.id}</td>
           <td>${item.producto.nombre}</td>
           <td>${item.cantidad}</td>
           <td>${item.color}</td>
           <td>${item.talla}</td>
           <td>${item.producto.precio * item.cantidad}</td>
-          
-        </tr>`,
-    );
-
+          <td>
+            <ul>${personalizacionesList}</ul>
+          </td>
+        </tr>`;
+    });
+  
     const tableHeader = `
       <tr>
         <th>Código</th>
@@ -58,16 +67,17 @@ export class EmailService {
         <th>Color</th>
         <th>Talla</th>
         <th>Total</th>
+        <th>Personalizaciones</th>
       </tr>
     `;
-
+  
     const tableContent = `
       <table border="1">
         ${tableHeader}
         ${tableRows.join('')}
       </table>
     `;
-
+  
     return tableContent;
   }
 }
